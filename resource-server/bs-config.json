@@ -1,0 +1,10 @@
+{
+  "injectChanges": false,
+  "files": [
+    "./**/*.{json}"
+  ],
+  "server": {
+    "baseDir": "./"
+  },
+  "cors": true
+}

@@ -1,0 +1,41 @@
+<hr>
+<button (click)="loadData()">Load Data</button>
+<hr>
+<ng-container *ngIf="$tableData | async as tableData; else loadingTmpl">
+
+  <table>
+    <thead>
+    <tr>
+      @for (h of tableData.header; track $index) {
+        <th>{{h}}</th>
+      }
+    </tr>
+    </thead>
+    <tbody>
+    @for (user of tableData.body; track $index) {
+      <tr>
+        @for (h of tableData.header; track $index) {
+          <td>
+            @if (h == 'isActive') {
+              @if (user[h]) {
+                  <span style="color: green">✔</span>
+              }@else {
+                  <span style="color: red">X</span>
+              }
+            } @else {
+              {{user[h]}}
+            }
+          </td>
+        }
+      </tr>
+    }
+    </tbody>
+  </table>
+
+</ng-container>
+
+
+
+<ng-template #loadingTmpl>
+  Loading ...
+</ng-template>

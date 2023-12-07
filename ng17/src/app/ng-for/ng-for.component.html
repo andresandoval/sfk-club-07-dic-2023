@@ -1,0 +1,28 @@
+<ng-container *ngIf="$tableData | async as tableData; else loadingTmpl">
+
+  <table>
+    <thead>
+    <tr>
+      @for (h of tableData.header; track $index) {
+        <th>{{h}}</th>
+      }
+    </tr>
+    </thead>
+    <tbody>
+    @for (user of tableData.body; track $index) {
+      <tr>
+        @for (h of tableData.header; track $index) {
+          <td>{{user[h]}}</td>
+        }
+      </tr>
+    }
+    </tbody>
+  </table>
+
+</ng-container>
+
+
+
+<ng-template #loadingTmpl>
+  Loading ...
+</ng-template>

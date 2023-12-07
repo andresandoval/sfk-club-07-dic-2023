@@ -1,0 +1,31 @@
+<ng-container *ngIf="$tableData | async as tableData; else loadingTmpl">
+
+
+  <table>
+    <thead>
+    <tr>
+      <ng-container *ngFor="let h of tableData.header">
+        <th>{{h}}</th>
+      </ng-container>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let user of tableData.body">
+      <tr>
+        <ng-container *ngFor="let h of tableData.header">
+          <td>
+            {{user[h]}}
+          </td>
+        </ng-container>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+
+</ng-container>
+
+
+
+<ng-template #loadingTmpl>
+  Loading ...
+</ng-template>

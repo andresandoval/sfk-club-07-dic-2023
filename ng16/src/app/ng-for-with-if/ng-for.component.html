@@ -1,0 +1,43 @@
+<hr>
+<button (click)="loadData()">Load Data</button>
+<hr>
+<ng-container *ngIf="$tableData | async as tableData; else loadingTmpl">
+
+
+  <table>
+    <thead>
+    <tr>
+      <ng-container *ngFor="let h of tableData.header">
+        <th>{{h}}</th>
+      </ng-container>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let user of tableData.body">
+      <tr>
+        <ng-container *ngFor="let h of tableData.header">
+          <td>
+            <ng-container *ngIf="h == 'isActive'; else isNotActivePropTmpl">
+              <ng-container *ngIf="user[h]; else notActiveTmpl">
+                <span style="color: green">✔</span>
+              </ng-container>
+            </ng-container>
+            <ng-template #isNotActivePropTmpl>
+              {{user[h]}}
+            </ng-template>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+
+</ng-container>
+
+
+<ng-template #loadingTmpl>
+  Loading ...
+</ng-template>
+<ng-template #notActiveTmpl>
+  <span style="color: red">X</span>
+</ng-template>
